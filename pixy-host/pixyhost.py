@@ -3,7 +3,7 @@ from ctypes import *
 from networktables import NetworkTables
 
 ##CONFIGURATION VARIABLES##
-serveraddress='localhost'  ##DEFAULT:"RoboRIO-FRC-xxxx.local"
+serveraddress='169.254.251.193'  ##DEFAULT:"RoboRIO-FRC-xxxx.local"
 tablename='pixy-table'
 
 print ("Pixy NetworkTables Interface from Out of Orbit Robotics, Team 2449")
@@ -32,9 +32,9 @@ while 1:
 	count = pixy_get_blocks(100, blocks)
 	print count
 	if count > 0:
-		print 'frame %3d:' % (frame)
-		frame = frame + 1
-		for index in range (0, count):
+    		print 'frame %3d:' % (frame)
+    		frame = frame + 1
+    		for index in range (0, count):
 			print '[BLOCK_TYPE=%d SIG=%d X=%3d Y=%3d WIDTH=%3d HEIGHT=%3d]' % (blocks[index].type, blocks[index].signature, blocks[index].x, blocks[index].y, blocks[index].width, blocks[index].height)
 			table.putNumber('BLOCK_TYPE',blocks[index].type)
 			table.putNumber('SIG',blocks[index].signature)
@@ -42,3 +42,10 @@ while 1:
 			table.putNumber('Y',blocks[index].y)
 			table.putNumber('WIDTH',blocks[index].width)
 			table.putNumber('HEIGHT',blocks[index].height)
+	else:
+			table.putNumber('BLOCK_TYPE,0)
+                        table.putNumber('SIG',0)
+                        table.putNumber('X',0)
+                        table.putNumber('Y',0)
+                        table.putNumber('WIDTH',0)
+                        table.putNumber('HEIGHT',0)
